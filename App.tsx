@@ -2,7 +2,7 @@ import {Text, View, TextInput} from 'react-native';
 
 export default function App(){
   return (
-    <View style={{backgroundColor: '#131016', flex: 1}}>
+    <View style={{backgroundColor: '#131016', flex: 1, paddingHorizontal: 24, paddingVertical: 25}}>
     <Text key={"titulo"} style={{
       color: '#FDFCFE', 
       fontSize: 24, 
