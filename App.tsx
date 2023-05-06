@@ -1,6 +1,13 @@
-import {Text, View, StyleSheet,TextInput, TouchableOpacity, ScrollView} from 'react-native';
-
+import {Text, View, StyleSheet,TextInput, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
 export default function App(){
+  const [ members, setMembers ] = useState<string[]>([]);
+  const [ name, setName ] = useState('');
+  console.log({members});
+  function handleSubmit() {
+    setMembers(m => [name, ...m]);
+    setName('');
+  }
   return (
     <View style={styled.container}>
     <Text key={"titulo"} style={styled.pageTitle}>
@@ -10,10 +17,16 @@ export default function App(){
       Sexta, 4 de Novembro de 2022.
     </Text>
       <View style={{flexDirection: 'row', gap:7, marginTop:24 }}>
-        <TextInput placeholder="Nome do participante" placeholderTextColor="#6B6B6B" style={styled.input}/>
-        <TouchableOpacity style={styled.button}><Text style={{color: '#FDFCFE', fontSize:24, lineHeight:24, fontWeight: '400'}}>+</Text></TouchableOpacity>
+        <TextInput placeholder="Nome do participante" placeholderTextColor="#6B6B6B" style={styled.input} onChangeText={setName} value={name}/>
+        <TouchableOpacity style={styled.button} onPress={handleSubmit}><Text style={{color: '#FDFCFE', fontSize:24, lineHeight:24, fontWeight: '400'}}>+</Text></TouchableOpacity>
       </View>
+      {members.map((name, index) => (
+      <Text key={name + index} style={styled.pageDate}>
+        {name}
+      </Text>
+    ))}
     </View>
+    
   );
 }
 const styled = StyleSheet.create({
@@ -47,6 +60,7 @@ const styled = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     fontWeight: '400',
+  
   },
   button:{
     alignItems: 'center',
@@ -55,6 +69,5 @@ const styled = StyleSheet.create({
     height: 56,
     borderRadius: 4,
     backgroundColor: '#31CF67',
-
   }
 })
